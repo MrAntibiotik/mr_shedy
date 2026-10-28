@@ -1,14 +1,35 @@
+/*
+  Кольорова концепція:
+  - темний смарагдовий (бренд) — шапка, перший екран, підвал: впізнаваність і приватність;
+  - світлий м'ятно-білий — основний контент: спокій, «медичність», легко читати;
+  - яскраво-зелений — лише дії (кнопки), щоб «Подзвонити» було найпомітнішим;
+  - теплий помаранчевий — лише для екстрених попереджень.
+*/
 :root {
-  --bg: #0b1412;
-  --bg-2: #10201c;
-  --card: #142824;
-  --line: #21403a;
-  --text: #e8f1ee;
-  --muted: #9db3ad;
+  /* бренд / темні зони */
+  --brand-dark: #06100e;
+  --brand-dark-2: #0d1f1a;
+  --brand-line: #1f3a33;
+  --on-dark: #eef6f3;
+  --on-dark-muted: #a7bfb8;
+
+  /* світлі зони */
+  --bg: #ffffff;
+  --bg-soft: #f1f8f5;
+  --card: #ffffff;
+  --line: #dcebe5;
+  --text: #13261f;
+  --muted: #4f675f;
+
+  /* акценти */
   --accent: #2fbf8f;
-  --accent-2: #1d8f69;
-  --warn: #ff8a65;
+  --accent-ink: #13805d;
+  --warn: #c4501f;
+  --warn-bg: #fff4ee;
+  --warn-line: #f2b597;
+
   --radius: 16px;
+  --shadow: 0 1px 2px rgba(16, 40, 33, .04), 0 8px 24px rgba(16, 40, 33, .06);
 }
 
 * { box-sizing: border-box; }
@@ -24,26 +45,26 @@ body {
   font-size: 17px;
 }
 
-a { color: var(--accent); }
+a { color: var(--accent-ink); }
 
 img, svg { max-width: 100%; }
 
 .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
 
-/* Header */
+/* Header (темний, бренд) */
 .top {
   position: sticky; top: 0; z-index: 10;
-  background: rgba(11, 20, 18, .92);
+  background: rgba(6, 16, 14, .94);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--brand-line);
 }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
-.logo { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 800; letter-spacing: .14em; }
+.logo { display: flex; align-items: center; gap: 10px; color: var(--on-dark); text-decoration: none; font-weight: 800; letter-spacing: .14em; }
 .logo svg { width: 26px; height: 32px; }
 .top nav { display: flex; gap: 20px; }
-.top nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
-.top nav a:hover { color: var(--text); }
-.top .phone { font-weight: 700; color: var(--text); text-decoration: none; white-space: nowrap; }
+.top nav a { color: var(--on-dark-muted); text-decoration: none; font-size: 15px; }
+.top nav a:hover { color: var(--on-dark); }
+.top .phone { font-weight: 700; color: var(--on-dark); text-decoration: none; white-space: nowrap; }
 
 /* Buttons */
 .btn {
@@ -51,43 +72,61 @@ img, svg { max-width: 100%; }
   padding: 14px 22px; border-radius: 12px; font-weight: 700; text-decoration: none;
   border: 1px solid var(--line); color: var(--text); background: var(--card);
 }
-.btn-primary { background: var(--accent); border-color: var(--accent); color: #04130e; }
+.btn:hover { border-color: var(--accent); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #04130e; box-shadow: 0 6px 20px rgba(47, 191, 143, .35); }
 .btn-primary:hover { background: #3ad4a0; }
-.btn:not(.btn-primary):hover { border-color: var(--accent); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 
-/* Hero */
+/* Hero (темний, бренд) */
 .hero {
-  padding: 72px 0 56px;
-  background: radial-gradient(900px 400px at 80% 0%, rgba(47, 191, 143, .18), transparent 70%), var(--bg);
+  padding: 64px 0 56px;
+  color: var(--on-dark);
+  background:
+    radial-gradient(700px 380px at 85% 20%, rgba(47, 191, 143, .22), transparent 70%),
+    linear-gradient(180deg, var(--brand-dark) 0%, var(--brand-dark-2) 100%);
 }
+.hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: center; }
+.hero-logo { width: 100%; height: auto; aspect-ratio: 1; max-width: 340px; justify-self: center; filter: drop-shadow(0 20px 60px rgba(47, 191, 143, .25)); }
 .hero h1 { font-size: clamp(30px, 5vw, 50px); line-height: 1.15; margin: 0 0 16px; }
 .hero h1 span { color: var(--accent); }
-.hero p.lead { font-size: 19px; color: var(--muted); max-width: 640px; margin: 0; }
-.badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; padding: 0; list-style: none; }
-.badges li { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 14px; }
+.hero p.lead { font-size: 19px; color: var(--on-dark-muted); max-width: 640px; margin: 0; }
+.hero .btn:not(.btn-primary) { background: rgba(255, 255, 255, .06); border-color: var(--brand-line); color: var(--on-dark); }
+.hero .btn:not(.btn-primary):hover { border-color: var(--accent); }
+.hero .crumbs, .hero .crumbs a { color: var(--on-dark-muted); }
 .price-tag { display: inline-block; margin-top: 20px; font-size: 22px; font-weight: 800; }
-.price-tag small { font-weight: 400; color: var(--muted); font-size: 15px; }
+.price-tag small { font-weight: 400; color: var(--on-dark-muted); font-size: 15px; }
 
-/* Sections */
+.badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; padding: 0; list-style: none; }
+.badges li { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 15px; }
+.hero .badges li { background: rgba(255, 255, 255, .06); border-color: var(--brand-line); font-size: 14px; }
+
+/* Trust strip */
+.trust { padding: 28px 0; background: var(--bg-soft); border-bottom: 1px solid var(--line); }
+.trust .grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.trust-item { display: flex; gap: 12px; align-items: flex-start; }
+.trust-item .ico { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: #dff3ea; font-size: 20px; }
+.trust-item b { display: block; }
+.trust-item span { color: var(--muted); font-size: 15px; }
+
+/* Sections (світлі) */
 section { padding: 56px 0; }
-section.alt { background: var(--bg-2); }
+section.alt { background: var(--bg-soft); }
 h2 { font-size: clamp(24px, 3.5vw, 34px); margin: 0 0 24px; }
 h3 { margin: 0 0 8px; font-size: 19px; }
 
 .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 .card {
-  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow);
 }
 .card p { margin: 0; color: var(--muted); }
-a.card { text-decoration: none; color: var(--text); display: block; }
-a.card:hover { border-color: var(--accent); }
-a.card .more { display: inline-block; margin-top: 12px; color: var(--accent); font-weight: 700; }
+a.card { text-decoration: none; color: var(--text); display: block; transition: border-color .15s, transform .15s; }
+a.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+a.card .more { display: inline-block; margin-top: 12px; color: var(--accent-ink); font-weight: 700; }
 
 .steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
 .steps li {
   counter-increment: s; position: relative; padding: 18px 18px 18px 64px;
-  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
 }
 .steps li::before {
   content: counter(s); position: absolute; left: 18px; top: 16px;
@@ -96,48 +135,44 @@ a.card .more { display: inline-block; margin-top: 12px; color: var(--accent); fo
 }
 
 .alert {
-  border: 1px solid var(--warn); background: rgba(255, 138, 101, .08);
+  border: 1px solid var(--warn-line); background: var(--warn-bg);
   border-radius: var(--radius); padding: 20px 22px;
 }
 .alert strong { color: var(--warn); }
 .alert ul { margin: 8px 0 0; padding-left: 20px; }
 
-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: var(--radius); overflow: hidden; }
-th, td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; }
-th { color: var(--muted); font-weight: 600; font-size: 14px; }
-td:last-child { font-weight: 700; white-space: nowrap; }
-.table-scroll { overflow-x: auto; }
-
 details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
 summary { cursor: pointer; font-weight: 700; }
 details p { color: var(--muted); margin: 10px 0 0; }
 
-.crumbs { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
-.crumbs a { color: var(--muted); }
+.crumbs { font-size: 14px; margin-bottom: 16px; }
 
-.note { font-size: 14px; color: var(--muted); }
+.note { font-size: 14px; color: var(--on-dark-muted); }
 
-/* Footer */
-footer { border-top: 1px solid var(--line); padding: 40px 0 100px; color: var(--muted); font-size: 15px; }
+/* Footer (темний, бренд) */
+footer { background: var(--brand-dark); color: var(--on-dark-muted); border-top: 1px solid var(--brand-line); padding: 40px 0 100px; font-size: 15px; }
 footer .grid { gap: 24px; }
-footer h3 { color: var(--text); font-size: 16px; }
-footer a { color: var(--muted); }
+footer h3 { color: var(--on-dark); font-size: 16px; }
+footer a { color: var(--on-dark-muted); }
 
 /* Mobile sticky call bar */
 .callbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
   display: none; gap: 8px; padding: 10px 12px;
-  background: rgba(11, 20, 18, .96); border-top: 1px solid var(--line);
+  background: rgba(6, 16, 14, .96); border-top: 1px solid var(--brand-line);
 }
 .callbar .btn { flex: 1; padding: 12px; }
+.callbar .btn:not(.btn-primary) { background: rgba(255, 255, 255, .06); border-color: var(--brand-line); color: var(--on-dark); }
 
 .test-banner {
-  background: var(--warn); color: #1b0d07; text-align: center; font-size: 14px; font-weight: 700; padding: 6px 16px;
+  background: #ffb38f; color: #2a1206; text-align: center; font-size: 14px; font-weight: 700; padding: 6px 16px;
 }
 
 @media (max-width: 760px) {
   .top nav { display: none; }
   .callbar { display: flex; }
-  .hero { padding: 48px 0 40px; }
+  .hero { padding: 40px 0 40px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 8px; }
+  .hero-logo { order: -1; max-width: 160px; justify-self: start; }
   section { padding: 44px 0; }
 }
