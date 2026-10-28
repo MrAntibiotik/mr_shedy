@@ -37,6 +37,7 @@
   </script>
 </head>
 <body>
+  <div class="progress" aria-hidden="true"></div>
   <div class="test-banner">Тестова версія сайту. Телефон, адреса, ціни та ліцензія поки що умовні.</div>
 
   <header class="top">
@@ -49,6 +50,7 @@
         <a href="vyvedennya-iz-zapoyu/">Вихід із запою</a>
         <a href="krapelnytsya-vid-pokhmillya/">Похмілля</a>
         <a href="narkoloh-dodomu/">Лікар додому</a>
+        <a href="#likar">Лікар</a>
         <a href="#kontakty">Контакти</a>
       </nav>
       <a class="phone" href="tel:+380000000000">+380 00 000 00 00</a>
@@ -74,7 +76,10 @@
           <a class="btn" href="https://www.instagram.com/kapelka.che/">Direct в Instagram</a>
         </div>
         </div>
-        <img class="hero-logo" src="logo.webp" width="640" height="640" alt="Логотип KAPELKA — крапля">
+        <div class="hero-logo-wrap" aria-hidden="true">
+          <span class="ripple"></span><span class="ripple"></span><span class="ripple"></span>
+          <img class="hero-logo" src="logo.webp" width="640" height="640" alt="">
+        </div>
       </div>
     </section>
 
@@ -110,7 +115,30 @@
       </div>
     </section>
 
-    <section class="alt">
+    <section class="alt" id="likar">
+      <div class="wrap doctor">
+        <div class="doctor-photo">
+          <img src="doctor.webp" width="800" height="1000" alt="Лікар KAPELKA у кабінеті" loading="lazy">
+          <div class="doctor-badge">Ліцензований лікар</div>
+        </div>
+        <div>
+          <span class="eyebrow">Ваш лікар</span>
+          <h2>[Ім'я та прізвище лікаря]</h2>
+          <p class="role">[Спеціальність] · стаж [N] років</p>
+          <p>[Кілька речень про лікаря: освіта, досвід, підхід до пацієнтів і рідних.]</p>
+          <ul class="checks">
+            <li>Оглядає перед кожною процедурою</li>
+            <li>Підбирає склад крапельниці індивідуально</li>
+            <li>Консультує рідних, як підтримати людину далі</li>
+          </ul>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://t.me/" rel="nofollow">Поставити питання лікарю</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
       <div class="wrap">
         <h2>Як ми працюємо</h2>
         <ol class="steps">
@@ -182,5 +210,6 @@
     <a class="btn btn-primary" href="tel:+380000000000">Подзвонити</a>
     <a class="btn" href="https://t.me/" rel="nofollow">Telegram</a>
   </div>
+  <script src="script.js" defer></script>
 </body>
 </html>
