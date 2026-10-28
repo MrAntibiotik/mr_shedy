@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /
+# Тестова версія. Перед запуском замінити на:
+# User-agent: *
+# Allow: /
+# Sitemap: https://ВАШ-ДОМЕН/sitemap.xml
